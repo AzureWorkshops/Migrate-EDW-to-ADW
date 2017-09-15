@@ -1,0 +1,42 @@
+{
+    "title": "Migrate EDW to Azure SQL Data Warehouse",
+    "tagline": "Azure Workshops",
+    "lead": "Migrate an existing on-premises SQL Server data warehouse to Azure SQL Data Warehouse.",
+    "description": "Replace the existing functionality of an on-premises system: setup and configure an Azure SQL Data Warehouse, validate and migrate the existing data warehouse schema and data to Azure, configure an Azure Data Factory pipeline to move the data, and configure Power BI to access the data.",
+    "learn": [
+        "Azure Data Platform",
+        "Azure SQL Data Warehouse",
+        "Azure Data Factory",
+        "SQL Server 2016",
+        "Power BI"
+    ],
+    "audience": [
+        "CIOs",
+        "IT Managers",
+        "Data Architects and DBAs",
+        "Database Developers"
+    ],
+    "author": "Jim Rosengarth",
+    "timezone": "America/New_York",
+    "format": "html",
+    "processor": "Processor",
+    "html": {
+        "theme": "azure-white",
+        "float": false,
+        "search": false,
+        "toggle_code": false,
+        "breadcrumbs": true,
+        "breadcrumb_separator": " / ",
+        "date_modified": true,
+        "twitter": [
+            "azureworkshops"
+        ],
+        "buttons": [
+            {
+                "name": "PowerPoint",
+                "icon": "fa-file-powerpoint-o",
+                "url": "https://github.com/AzureWorkshops/Big-Data-Visualization/raw/master/AZW_Migrate_EDW_to_Azure.pptx"
+            }
+        ]
+    }
+}
