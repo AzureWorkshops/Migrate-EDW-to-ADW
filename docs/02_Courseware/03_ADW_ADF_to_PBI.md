@@ -1,5 +1,3 @@
-<img src="../images/.jpg" class="block"/>
-
 ## **Exercise 4:** Integrate Azure SQL Data Warehouse and On-Premises Data Sources with Azure Data Factory and Power BI
 
 **Overview:** In this portion of the exercise, you will setup integration with Azure Data Factory and Power BI.
