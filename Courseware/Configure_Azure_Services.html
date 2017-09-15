@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Configure Azure Services - Migrate EDW to Azure SQL Data Warehouse</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="description" content="Azure Workshops" />
+    <meta name="author" content="Jim Rosengarth">
+    <link rel="icon" href="" type="image/x-icon">
+    
+    <!-- Font -->
+    
+    <!-- CSS -->
+    <link href='../themes/azure/css/vs.css' rel='stylesheet' type='text/css'><link href='../themes/azure/css/theme.css' rel='stylesheet' type='text/css'><link href='../themes/azure/css/theme-white.min.css' rel='stylesheet' type='text/css'>
+</head>
+<body class="">
+
+        <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 col-md-offset-1">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">Azure Workshops</a>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <!--
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+<div id="content-wrapper" class="container-fluid">
+    <div class="row hidden-print">
+        <div class="col-md-10 col-md-offset-1 breadcrumbs">
+            <a href="../index.html">Migrate EDW to Azure SQL Data Warehouse</a> / <a href="../Courseware/Configure_Azure_Services.html">Courseware</a> / <a href="../Courseware/Configure_Azure_Services.html">Configure Azure Services</a>        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-1 hidden-print">
+            <div data-spy="affix" data-offset-top="100">
+                <!-- Navigation -->
+                <ul class='Nav'><li class='Nav__item '><a href="../Overview.html">Overview</a></li><li class='Nav__item  has-children'><a href="#" class="aj-nav folder"><i class="Nav__arrow">&nbsp;</i>Getting Started</a><ul class='Nav'><li class='Nav__item '><a href="../Getting_Started/Requirements.html">Requirements</a></li><li class='Nav__item '><a href="../Getting_Started/Azure_Registration.html">Azure Registration</a></li><li class='Nav__item '><a href="../Getting_Started/Environment_Setup.html">Environment Setup</a></li></ul></li><li class='Nav__item Nav__item--open has-children'><a href="#" class="aj-nav folder"><i class="Nav__arrow">&nbsp;</i>Courseware</a><ul class='Nav'><li class='Nav__item Nav__item--active'><a href="../Courseware/Configure_Azure_Services.html">Configure Azure Services</a></li><li class='Nav__item '><a href="../Courseware/Data_and_Schema_Preparation.html">Data and Schema Preparation</a></li><li class='Nav__item '><a href="../Courseware/Migrate_to_ADW.html">Migrate to ADW</a></li><li class='Nav__item '><a href="../Courseware/Integrare_with_ADF.html">Integrare with ADF</a></li></ul></li></ul>
+                <div class="Links">
+                    
+                    <div class="pdf-link">
+                        <hr />
+                        <a href="../pdf/Migrate EDW to Azure SQL Data Warehouse.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span>Download PDF</span></a>
+                    </div>
+
+                                            <hr/>
+                        <div class="Twitter">
+                                                            <iframe allowtransparency="true" frameborder="0" scrolling="no" style="width:162px; height:20px;" src="https://platform.twitter.com/widgets/follow_button.html?screen_name=azureworkshops&amp;show_count=false"></iframe>
+                                <br />
+                                <br />
+                                                    </div>
+                                    </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <article class="Page">
+    <div class="pageHeader">
+        <h1>Configure Azure Services</h1>
+                    <div class="date"> Friday, September 15, 2017 5:25 PM</div>
+            </div>
+    <div class="copy">
+        <h2 id="page_Exercise-1-Configure-Azure-services"><strong>Exercise 1:</strong> Configure Azure services</h2>
+<p><strong>Overview:</strong> In this exercise, you will create and configure an Azure SQL Data Warehouse, an Azure Storage Account, and a Power BI Account.</p>
+<h3 id="page_Task1-Create-an-Azure-Storage-Account"><strong>Task1:</strong> Create an Azure Storage Account</h3>
+<ol>
+<li>
+<p>Browse to the Azure Portal and authenticate at <a href="https://portal.azure.com/" class="external">https://portal.azure.com/</a></p>
+</li>
+<li>
+<p>Click <strong>+New</strong> and type <strong>Storage account</strong> in the search box.  Choose <strong>Storage account</strong> from the results.</p>
+</li>
+</ol>
+<img src="../images/create_new_storage_account.jpg" class="block"/>
+<ol start="3">
+<li>Click <strong>Create</strong> on the Storage account blade.  Specify the following information and click <strong>Create</strong>.
+<ul>
+<li>Name: <strong>specify a unique DNS name</strong>
+</li>
+<li>Deployment model: <strong>Resource manager</strong>
+</li>
+<li>Account kind: <strong>General purpose</strong>
+</li>
+<li>Performance: <strong>Standard</strong>
+</li>
+<li>Replication: <strong>Locally-redundant storage (LRS)</strong>
+</li>
+<li>Storage encryption: <strong>Disabled</strong>
+</li>
+<li>Secure transfer required: <strong>Disabled</strong>
+</li>
+<li>Resource group: <strong>Create new - EDWmigrationStor</strong>
+</li>
+<li>Location: <strong>Location near you</strong>
+</li>
+</ul>
+</li>
+</ol>
+<img src="../images/create_storage_account_form.jpg" class="block"/>
+<ol start="4">
+<li>Navigate to the new storage account and click <strong>Blobs</strong>.</li>
+</ol>
+<img src="../images/click_blobs.jpg" class="block"/>
+<ol start="5">
+<li>On the Blob service blade Click the <strong>+Container</strong> button.</li>
+</ol>
+<img src="../images/blob_container.jpg" class="block"/>
+<ol start="6">
+<li>On the New container blade type <strong>migration</strong> for the name and then click <strong>Create</strong>.</li>
+</ol>
+<img src="../images/new_container.jpg" class="block"/>
+<h3 id="page_Task-2-Create-an-Azure-SQL-Data-Warehouse"><strong>Task 2:</strong> Create an Azure SQL Data Warehouse</h3>
+<ol>
+<li>Click <strong>+New</strong> and type <strong>SQL Data Warehouse</strong> in the search box.  Choose <strong>SQL Data Warehouse</strong> from the results.</li>
+</ol>
+<img src="../images/new_sql_dw.jpg" class="block"/>
+<ol start="2">
+<li>Click <strong>Create</strong> on the SQL Data Warehouse blade.  Specify the following information and then click the <strong>Server</strong> tile.
+<ul>
+<li>Name: <strong>CohoDW</strong>
+</li>
+<li>Resource group: <strong>Create new - CohoDWRG</strong>
+</li>
+<li>Performance: <strong>100</strong>
+</li>
+</ul>
+</li>
+</ol>
+<img src="../images/create_sql_dw_form.jpg" class="block"/>
+<ol start="3">
+<li>On the Server blade, select <strong>Create a new server</strong>, specify the following options and click <strong>Select</strong>.
+<ul>
+<li>Server name: <strong>Choose a unique name</strong>
+</li>
+<li>Server admin login: <strong>demouser</strong>
+</li>
+<li>Password: <strong>demo@pass123</strong>
+</li>
+<li>Location: <strong>Same location as your source</strong>
+</li>
+<li>Allow azure services: <strong>checked</strong>
+</li>
+</ul>
+</li>
+</ol>
+<img src="../images/sql_dw_create_new_server.jpg" class="block"/>
+<ol start="4">
+<li>On the SQL Data Warehouse blade click <strong>Create</strong>.</li>
+</ol>
+<img src="../images/sql_dw_blade_click_create.jpg" class="block"/>
+<h3 id="page_Task-3-Create-an-Azure-Data-Factory"><strong>Task 3:</strong> Create an Azure Data Factory</h3>
+<ol>
+<li>
+<p>From the Azure Portal, click new and type Data Factory into the search box.</p>
+</li>
+<li>
+<p>Choose Data Factory from the search results.</p>
+</li>
+</ol>
+<img src="../images/choose_data_factory.jpg" class="block"/>
+<ol start="3">
+<li>
+<p>Click <strong>create</strong> on the information blade.</p>
+</li>
+<li>
+<p>On the new data factory blade, give your data factory a unique name, create a new resource group called <strong>CohoDF</strong>, and choose the location nearest to you.</p>
+</li>
+</ol>
+<img src="../images/new_adf.jpg" class="block"/>
+<ol start="5">
+<li>Click <strong>Create</strong> to deploy your Data Factory.</li>
+</ol>
+<h3 id="page_Task-4-Create-a-Power-BI-Pro-account"><strong>Task 4:</strong> Create a Power BI Pro account</h3>
+<ol>
+<li>
+<p>Note that these steps describe creating an account that can be enabled for a Power BI Pro trial from within an Azure Pass subscription or MSDN subscription. If you are using an organizational account for this hackathon some of these steps may be unnecessary or impossible depending on your level of access. If your existing account is already enabled for Power BI Pro then you may skip this task.</p>
+</li>
+<li>
+<p>Open a browser and navigate to the Azure Portal at <a href="http://portal.azure.com" class="external">http://portal.azure.com</a></p>
+</li>
+<li>
+<p>Navigate to <strong>Azure Active Directory</strong>.</p>
+</li>
+</ol>
+<img src="../images/azure_active_dir_icon.jpg" class="block"/>
+<ol start="4">
+<li>
+<p>If you have multiple subscriptions, you will need to choose the correct Azure Active Directory Tenant. By default, your tenant is called <strong>default directory</strong>.</p>
+</li>
+<li>
+<p>Once you have determined the correct AD tenant, click on <strong>Users and groups</strong>.</p>
+</li>
+</ol>
+<img src="../images/users_and_groups.jpg" class="block"/>
+<ol start="6">
+<li>Click on the <strong>All users</strong> tile.</li>
+</ol>
+<img src="../images/all_users_tile.jpg" class="block"/>
+<ol start="7">
+<li>At the bottom of the users screen, click on the <strong>+New user</strong> button.</li>
+</ol>
+<img src="../images/new_user_button.jpg" class="block"/>
+<ol start="8">
+<li>Fill in the configurations per the below instructions and then click <strong>Create</strong>.
+<ul>
+<li>Name: PowerBI User</li>
+<li>User name: Choose a username, this will require you to specify the domain. By default this domain will be <strong>&lt;name of your subscription&gt;.onmicrosoft.com</strong>
+</li>
+<li>Profile: Configure the profile</li>
+<li>Properties: Leave the default</li>
+<li>Groups: Leave the default</li>
+<li>Directory Role: <strong>Global administrator</strong>
+</li>
+<li>Password: <strong>Copy the password</strong>, you will login and change this later.</li>
+</ul>
+</li>
+</ol>
+<img src="../images/new_user_form.jpg" class="block"/>
+<ol start="9">
+<li>Open a new <strong>InPrivate</strong> browser and login to <a href="http://portal.azure.com" class="external">http://portal.azure.com</a>. You will be prompted to change your password.</li>
+</ol>
+<img src="../images/change_password.jpg" class="block"/>
+<ol start="10">
+<li>
+<p>After changing your password, navigate to the Office 365 admin center at <a href="https://portal.office.com/admin/default.aspx" class="external">https://portal.office.com/admin/default.aspx</a></p>
+</li>
+<li>
+<p>If required, <strong>update your admin contact info</strong>.</p>
+</li>
+</ol>
+<img src="../images/update_o365_admin_contact_info.jpg" class="block"/>
+<ol start="12">
+<li>On the navigation pane, expand <strong>Billing</strong> and click <strong>Subscriptions</strong>.</li>
+</ol>
+<img src="../images/billing_subscriptions.jpg" class="block"/>
+<ol start="13">
+<li>Click the <strong>+ Add subscriptions</strong> button.</li>
+</ol>
+<img src="../images/add_subscriptions_button.jpg" class="block"/>
+<ol start="14">
+<li>Scroll down to Other Plans, and find <strong>Power BI (free)</strong> and hover over the <strong>ellipses</strong> at the bottom.</li>
+</ol>
+<img src="../images/pbi_free.jpg" class="block"/>
+<ol start="15">
+<li>Click the <strong>Buy now</strong> button.</li>
+</ol>
+<img src="../images/buy_now_button.jpg" class="block"/>
+<ol start="16">
+<li>
+<p>Click on <strong>checkout</strong>, accept the defaults and fill out the remaining billing information and <strong>choose to be invoiced for the bill</strong>. The total should be $0.00.</p>
+</li>
+<li>
+<p>Click on <strong>assign users to your new subscription</strong>.</p>
+</li>
+</ol>
+<img src="../images/assign_users_to_new_sub.jpg" class="block"/>
+<ol start="18">
+<li>Check the box next to the account you created.</li>
+</ol>
+<img src="../images/active_users.jpg" class="block"/>
+<ol start="19">
+<li>Click <strong>Edit</strong> Product licenses.</li>
+</ol>
+<img src="../images/edit_product_licenses.jpg" class="block"/>
+<ol start="20">
+<li>Set the <strong>location</strong> to your location, set the Power BI (free) switch to <strong>On</strong>, then click <strong>Save</strong>.</li>
+</ol>
+<img src="../images/product_license_location.jpg" class="block"/>
+<ol start="21">
+<li>
+<p>Close all of the account editor windows.</p>
+</li>
+<li>
+<p>Navigate to <a href="http://powerbi.com" class="external">http://powerbi.com</a> and click <strong>Sign in</strong>. If you are prompted for additional sign-in then enter your sign-in if necessary. If you are prompted to invite more people, choose <strong>skip</strong>. This should bring you to the Power BI Service. Later in this hackathon you will enable the trial for Power BI Pro.</p>
+</li>
+</ol>
+<img src="../images/pbi_signin.jpg" class="block"/>
+<h2 id="page_Summary">Summary</h2>
+<p>In this exercise, you configured your Azure services in preparation for your warehouse environment migration. You configured an Azure Storage account to temporarily store your data before importing, you then created an Azure SQL Data Warehouse which you will use as a migration target and finally you created a Power BI account which you will use to integrate and modernize your data warehouse environment.</p>
+    </div>
+
+            <nav class="hidden-print">
+            <ul class="pager">
+                                    <li class=pager-prev><a href="../Getting_Started/Environment_Setup.html">Previous</a></li>
+                                                    <li class=pager-next><a href="../Courseware/Data_and_Schema_Preparation.html">Next</a></li>            </ul>
+        </nav>
+    </article>
+        </div>
+        <div class="col-md-2 hidden-print">
+            <div class="article-links" data-spy="affix" data-offset-top="100">
+                <strong>In this article</strong><ol><li><a href="#page_Summary">Summary</a></li></ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div id="footer" class="container-fluid hidden-print">
+        <div class="row">
+            <div class="col-md-2 col-md-offset-1">
+            
+            </div>
+            <div class="col-md-8" style="text-align:right;">
+            This work is licensed under a Creative Commons Attribution 4.0 International License.
+            </div>
+        </div>
+    </div>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- JS -->
+    
+    <script src="../themes/azure/js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <script src="../themes/azure/js/theme.js"></script>
+
+</body>
+</html>

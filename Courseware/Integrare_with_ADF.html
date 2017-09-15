@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Integrare with ADF - Migrate EDW to Azure SQL Data Warehouse</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="description" content="Azure Workshops" />
+    <meta name="author" content="Jim Rosengarth">
+    <link rel="icon" href="" type="image/x-icon">
+    
+    <!-- Font -->
+    
+    <!-- CSS -->
+    <link href='../themes/azure/css/vs.css' rel='stylesheet' type='text/css'><link href='../themes/azure/css/theme.css' rel='stylesheet' type='text/css'><link href='../themes/azure/css/theme-white.min.css' rel='stylesheet' type='text/css'>
+</head>
+<body class="">
+
+        <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 col-md-offset-1">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">Azure Workshops</a>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <!--
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+<div id="content-wrapper" class="container-fluid">
+    <div class="row hidden-print">
+        <div class="col-md-10 col-md-offset-1 breadcrumbs">
+            <a href="../index.html">Migrate EDW to Azure SQL Data Warehouse</a> / <a href="../Courseware/Configure_Azure_Services.html">Courseware</a> / <a href="../Courseware/Integrare_with_ADF.html">Integrare with ADF</a>        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-1 hidden-print">
+            <div data-spy="affix" data-offset-top="100">
+                <!-- Navigation -->
+                <ul class='Nav'><li class='Nav__item '><a href="../Overview.html">Overview</a></li><li class='Nav__item  has-children'><a href="#" class="aj-nav folder"><i class="Nav__arrow">&nbsp;</i>Getting Started</a><ul class='Nav'><li class='Nav__item '><a href="../Getting_Started/Requirements.html">Requirements</a></li><li class='Nav__item '><a href="../Getting_Started/Azure_Registration.html">Azure Registration</a></li><li class='Nav__item '><a href="../Getting_Started/Environment_Setup.html">Environment Setup</a></li></ul></li><li class='Nav__item Nav__item--open has-children'><a href="#" class="aj-nav folder"><i class="Nav__arrow">&nbsp;</i>Courseware</a><ul class='Nav'><li class='Nav__item '><a href="../Courseware/Configure_Azure_Services.html">Configure Azure Services</a></li><li class='Nav__item '><a href="../Courseware/Data_and_Schema_Preparation.html">Data and Schema Preparation</a></li><li class='Nav__item '><a href="../Courseware/Migrate_to_ADW.html">Migrate to ADW</a></li><li class='Nav__item Nav__item--active'><a href="../Courseware/Integrare_with_ADF.html">Integrare with ADF</a></li></ul></li></ul>
+                <div class="Links">
+                    
+                    <div class="pdf-link">
+                        <hr />
+                        <a href="../pdf/Migrate EDW to Azure SQL Data Warehouse.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span>Download PDF</span></a>
+                    </div>
+
+                                            <hr/>
+                        <div class="Twitter">
+                                                            <iframe allowtransparency="true" frameborder="0" scrolling="no" style="width:162px; height:20px;" src="https://platform.twitter.com/widgets/follow_button.html?screen_name=azureworkshops&amp;show_count=false"></iframe>
+                                <br />
+                                <br />
+                                                    </div>
+                                    </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <article class="Page">
+    <div class="pageHeader">
+        <h1>Integrare with ADF</h1>
+                    <div class="date"> Friday, September 15, 2017 5:25 PM</div>
+            </div>
+    <div class="copy">
+        <h2 id="page_Exercise-4-Integrate-Azure-SQL-Data-Warehouse-and-On-Premises-Data-Sources-with-Azure-Data-Factory-and-Power-BI"><strong>Exercise 4:</strong> Integrate Azure SQL Data Warehouse and On-Premises Data Sources with Azure Data Factory and Power BI</h2>
+<p><strong>Overview:</strong> In this portion of the exercise, you will setup integration with Azure Data Factory and Power BI.</p>
+<div class="bs-callout bs-callout-primary"><h4>Note</h4>To connect Power BI dashboards and reports directly to Azure SQL Data Warehouse requires a Power BI Pro subscription. Please see the instructions earlier in this hackathon to configure an account for Power BI and enable a Power BI Pro trial if you do not already have one.</div>
+
+<h3 id="page_Task-1-Connect-Power-BI-to-Azure-SQL-Data-Warehouse"><strong>Task 1:</strong> Connect Power BI to Azure SQL Data Warehouse</h3>
+<ol>
+<li>
+<p>Connect to the Azure Portal and to your Azure SQL Data Warehouse.</p>
+</li>
+<li>
+<p>Make note of your server name to use in your data source configuration later in this task.</p>
+</li>
+</ol>
+<img src="../images/remark_server_name.jpg" class="block"/>
+<ol start="3">
+<li>Open a web browser and navigate to <a href="https://powerbi.microsoft.com" class="external"><strong>powerbi.com</strong></a> and click <strong>Sign in</strong> in the upper right corner of the screen.</li>
+</ol>
+<img src="../images/pbi_signin.jpg" class="block"/>
+<ol start="4">
+<li>
+<p>Sign in with the organizational account that you are using to access Power Bi Pro.</p>
+</li>
+<li>
+<p>Click on the <strong>Get Databases</strong> button.</p>
+</li>
+</ol>
+<img src="../images/pbi_get_databases.jpg" class="block"/>
+<ol start="6">
+<li>On the <strong>Get Data &gt; Databases &amp; More</strong> screen, click on <strong>Azure SQL Data Warehouse</strong> the click <strong>Connect</strong>. If you are presented with a message to indicating that you need Power BI Pro, click the option to enable the trial and a Power BI Pro trial will be started for this account.</li>
+</ol>
+<img src="../images/pbi_pro_trial.jpg" class="block"/>
+<ol start="7">
+<li>Supply your Azure Data Warehouse server details:</li>
+</ol>
+<img src="../images/pbi_adw_server_details.jpg" class="block"/>
+<ol start="8">
+<li>Provide the Azure SQL Data Warehouse credentials: <strong>demouser</strong> and <strong>demo@pass123</strong>
+</li>
+</ol>
+<img src="../images/pbi_adw_credentials.jpg" class="block"/>
+<ol start="9">
+<li>It will take 1 to 2 minutes to load the data.</li>
+</ol>
+<img src="../images/pbi_loading_data.jpg" class="block"/>
+<ol start="10">
+<li>Once added the CohoDW SQL Data Warehouse will be shown under My Workspace &gt; Datasets. Click on the CohoDW dataset.</li>
+</ol>
+<img src="../images/pbi_my_workspace.jpg" class="block"/>
+<ol start="11">
+<li>In PowerBI, in the Fields blade, expand the <strong>SalesByRegion</strong> table and check the box next to <strong>StateProvinceCode</strong>. This will automatically launch the map visualization because PowerBI is smart enough to understand that this is geographic data.</li>
+</ol>
+<img src="../images/pbi_report.jpg" class="block"/>
+<ol start="12">
+<li>The circles that PowerBI adds to the map are simply every state or province in which Coho had sales. Let’s add the sales amount to this to make the map a little more interesting. Add the <strong>SalesAmount</strong> from the <strong>SalesByRegion</strong> table by putting a check next to it. The circles on the map will change in size to reflect the sum of all sales in that particular State/Province.</li>
+</ol>
+<img src="../images/pbi_report2.jpg" class="block"/>
+<ol start="13">
+<li>Click the <strong>Save</strong> button in the top right of your screen, name your report <strong>Sales by state</strong> and click <strong>Save</strong>.</li>
+</ol>
+<img src="../images/pbi_save_report.jpg" class="block"/>
+<h3 id="page_Task-2-Configure-a-Data-Management-Gateway-machine-to-enable-on-premises-data-sources-with-Data-Factory"><strong>Task 2:</strong> Configure a Data Management Gateway machine to enable on-premises data sources with Data Factory.</h3>
+<ol>
+<li>
+<p>Open the Azure Portal and navigate to your DWEnvironment resource group where you deployed your “on-premises” environment.</p>
+</li>
+<li>
+<p>In the DWEnivronment blade, click the <strong>Add+</strong> button.</p>
+</li>
+</ol>
+<img src="../images/dwenvironment_add.jpg" class="block"/>
+<ol start="3">
+<li>In the search field type <strong>Windows Server 2016</strong> and hit enter, then choose <strong>Windows Server 2016 Datacenter</strong> from the results.</li>
+</ol>
+<img src="../images/azure_marketplace_search.jpg" class="block"/>
+<ol start="4">
+<li>
+<p>On the Windows Server 2016 Datacenter blade click <strong>Create</strong>.</p>
+</li>
+<li>
+<p>On the Create virtual machine Basics blade, fill in the following information and then click <strong>OK</strong>:</p>
+<ul>
+<li>Name: <strong>DataGateway</strong>
+</li>
+<li>VM disk type: <strong>SSD</strong>
+</li>
+<li>Username: <strong>demouser</strong>
+</li>
+<li>Password: <strong>demo@pass123</strong>
+</li>
+<li>Resource Group: <strong>Use existing - DWEnvironment</strong>
+</li>
+<li>Location: <strong>Same location you used for this deployment</strong>
+</li>
+</ul>
+</li>
+</ol>
+<img src="../images/create_virtual_machine.jpg" class="block"/>
+<ol start="6">
+<li>On the Create virtual machine, Choose a size blade, select <strong>DS2_v2</strong> and click <strong>Select</strong>.</li>
+</ol>
+<img src="../images/select_ds2_v2_vm.jpg" class="block"/>
+<div class="bs-callout bs-callout-primary"><h4>Note</h4>If the DS2_v2 size is not visible you may need to select View All to see it.</div>
+
+<ol start="7">
+<li>On the Create virtual machine Settings blade, configure the following settings, take the defaults for any settings not defined here, then click <strong>OK</strong>:
+<ul>
+<li>Virtual network: <strong>cohovnet</strong>
+</li>
+<li>Subnet: <strong>Identity</strong>
+</li>
+</ul>
+</li>
+</ol>
+<img src="../images/vm_network_settings.jpg" class="block"/>
+<ol start="8">
+<li>
+<p>On the Create virtual machine Summary blade, click <strong>OK</strong> to begin the deployment of your Data Management Gateway machine.</p>
+</li>
+<li>
+<p>Wait for the virtual machine to deploy before proceeding.</p>
+</li>
+<li>
+<p>Once the virtual machine deployment has succeeded, connect to <strong>DataGateway</strong> using your <strong>demouser</strong> admin account.</p>
+</li>
+</ol>
+<img src="../images/data_gateway.jpg" class="block"/>
+<ol start="11">
+<li>Once logged into <strong>DataGateway</strong>, open Internet Explorer, click <strong>Settings</strong>, then choose <strong>Internet Options</strong>.</li>
+</ol>
+<img src="../images/internet_options.jpg" class="block"/>
+<ol start="12">
+<li>Click the Security tab, click on <strong>Trusted sites</strong>, and then click the <strong>Sites</strong> button.</li>
+</ol>
+<img src="../images/security_tab.jpg" class="block"/>
+<ol start="13">
+<li>On the Trusted sites window, uncheck the <strong>Require server verification (https:) for all sites in this zone</strong> checkbox, then add <strong>microsoft.com</strong> to the trusted site zone, then click <strong>Close</strong>.</li>
+</ol>
+<img src="../images/trusted_sites.jpg" class="block"/>
+<ol start="14">
+<li>
+<p>Click <strong>OK</strong>, then close Internet Explorer.</p>
+</li>
+<li>
+<p>Navigate to Server Manager, click on <strong>Local Server</strong>, then click on <strong>IE Enhanced Security Configuration</strong>.</p>
+</li>
+</ol>
+<img src="../images/local_server.jpg" class="block"/>
+<ol start="16">
+<li>Set IE Enhanced Security Configuration to <strong>Off</strong> for Administrators, then click <strong>OK</strong>.</li>
+</ol>
+<img src="../images/ie_esc_off.jpg" class="block"/>
+<ol start="17">
+<li>From within Server Manager, navigate to <strong>Local Server</strong>, then click <strong>WORKGROUP</strong>.</li>
+</ol>
+<img src="../images/local_server_workgroup.jpg" class="block"/>
+<ol start="18">
+<li>On the Computer Name tab, click the <strong>Change</strong> button.</li>
+</ol>
+<img src="../images/change_workgroup_button.jpg" class="block"/>
+<ol start="19">
+<li>Make this virtual machine a member of the <strong>coho.com</strong> domain then click <strong>OK</strong>.</li>
+</ol>
+<img src="../images/new_domain_name.jpg" class="block"/>
+<ol start="20">
+<li>
+<p>Use <strong>COHO\demouser</strong> and <strong>demo@pass123</strong> for the domain administrator account, then click <strong>OK</strong>, <strong>Close</strong>, <strong>Restart Now</strong> to reboot the computer.</p>
+</li>
+<li>
+<p>After the computer has rebooted, connect to **DataGateway using your <strong>demouser</strong> admin account.</p>
+</li>
+<li>
+<p>Open Internet Explorer, and navigate to the Azure Portal.</p>
+</li>
+<li>
+<p>Navigate to your Azure Data Factory that you created earlier.</p>
+</li>
+<li>
+<p>Click the <strong>Author and deploy</strong> tile.</p>
+</li>
+</ol>
+<img src="../images/author_and_deploy_tile.jpg" class="block"/>
+<ol start="25">
+<li>On the Data Factory Editor, click <strong>…More</strong>, then select <strong>New data gateway</strong>.</li>
+</ol>
+<img src="../images/new_data_gateway.jpg" class="block"/>
+<ol start="26">
+<li>Give your gateway a unique name and click <strong>OK</strong>.</li>
+</ol>
+<img src="../images/name_gateway.jpg" class="block"/>
+<ol start="27">
+<li>Click <strong>Install directly on this computer</strong> under Express Setup. This will launch the ClickOnce installation. Note that if you are using a browser other than Internet Explorer the install may not work correctly. If you are using Google Chrome you can install the ClickOnce plugin from the Chrome web store. Alternatively you may use the manual installation and register your Gateway with the key provided.</li>
+</ol>
+<img src="../images/express_setup.jpg" class="block"/>
+<ol start="28">
+<li>After the install completes, copy the <strong>authentication key</strong> and then click <strong>OK</strong>.</li>
+</ol>
+<img src="../images/copy_auth_key.jpg" class="block"/>
+<ol start="29">
+<li>From your DataGateway machine, launch the <strong>Microsoft Data Management Gateway Configuration Manager</strong> and verify that your data gateway is connected to your cloud service.</li>
+</ol>
+<img src="../images/launch_gateway_config_mgr.jpg" class="block"/>
+<ol start="30">
+<li>Register your gateway by clicking the Register link. Paste the data gateway authentication key into the box and click <strong>Register</strong>.</li>
+</ol>
+<img src="../images/register_gateway.jpg" class="block"/>
+<ol start="31">
+<li>Test your data management gateway by clicking on the Diagnostics tab, choose <strong>SqlServer</strong> for the data source type, <strong>sqlcohosales</strong> for the server, <strong>CohoSales</strong> for the database, <strong>Windows</strong> for the authentication mode, <strong>demouser</strong> for the user name and <strong>demo@pass123</strong> for the password.</li>
+</ol>
+<img src="../images/data_management_gateway_config_mgr.jpg" class="block"/>
+<ol start="32">
+<li>
+<p>From your DataGateway machine, go back to the Azure Portal and navigate to your Data Factory Editor.</p>
+</li>
+<li>
+<p>Click the <strong>New data store</strong> button and choose <strong>SQL Server</strong> from the list.</p>
+</li>
+</ol>
+<img src="../images/new_data_store.jpg" class="block"/>
+<ol start="34">
+<li>Modify the existing JSON, replacing the placeholder values with the appropriate <strong>ConnectionString</strong>, <strong>gatewayName</strong>, <strong>username</strong> and <strong>password</strong>. You should set Integrated Security to <strong>True</strong>. Your JSON should look similar to the following:</li>
+</ol>
+<img src="../images/modify_json.jpg" class="block"/>
+<ol start="35">
+<li>Click the <strong>Encrypt</strong> button to launch the Credentials Manager application and encrypt the Credentials. If you are using the Chrome browser this may not work without a ClickOnce extension installed.</li>
+</ol>
+<img src="../images/encrypt_button.jpg" class="block"/>
+<ol start="36">
+<li>After the Credentials Manager pops up, change the authentication to <strong>Windows Authentication</strong>, set the username to <strong>demouser</strong> and the password to <strong>demo@pass123</strong> then click <strong>OK</strong>.</li>
+</ol>
+<img src="../images/credentials_manager.jpg" class="block"/>
+<ol start="37">
+<li>Credentials Manager will encrypt your credentials, the result should look similar to this in your JSON document.</li>
+</ol>
+<img src="../images/credentials_manager.jpg" class="block"/>
+<ol start="38">
+<li>Click the Deploy button to deploy your SQL Server Linked Server.</li>
+</ol>
+<img src="../images/deploy_linked_server.jpg" class="block"/>
+<ol start="39">
+<li>Go back to the Data Factory Overview and click the <strong>Copy data</strong> tile to launch the copy data wizard.</li>
+</ol>
+<img src="../images/copy_data_tile.jpg" class="block"/>
+<ol start="40">
+<li>On the Properties page, set the Task name to <strong>CohoSalesPipeline</strong>, and set the schedule to <strong>Run once now</strong>.</li>
+</ol>
+<img src="../images/copy_data_properties.jpg" class="block"/>
+<div class="bs-callout bs-callout-primary"><h4>Note</h4>In a production scenario, you would schedule this pipeline to run on a recurring schedule based on business requirements but for our purposes a one-time copy will be sufficient.</div>
+
+<ol start="41">
+<li>On the Source data store page, click the From Existing Connections tab, then select the SqlServerLinkedService.</li>
+</ol>
+<img src="../images/source_data_store_page.jpg" class="block"/>
+<ol start="42">
+<li>
+<p>Click <strong>Next</strong> on the Connection properties page.</p>
+</li>
+<li>
+<p>On the Select tables page, select <strong>Sales.SalesOrderHeader</strong> and <strong>Sales.SalesTerritory</strong> tables and click <strong>Next</strong>.</p>
+</li>
+</ol>
+<img src="../images/select_tables_to_copy.jpg" class="block"/>
+<ol start="44">
+<li>On the Destination data store page, select <strong>Azure SQL Data Warehouse</strong> and click <strong>Next</strong>.</li>
+</ol>
+<img src="../images/adw_icon.jpg" class="block"/>
+<ol start="45">
+<li>Specify the Azure SQL Data Warehouse configuration for your Azure SQL Data Warehouse.</li>
+</ol>
+<img src="../images/adw_config.jpg" class="block"/>
+<ol start="46">
+<li>Accept the defaults on the Table mapping page and click <strong>Next</strong>.</li>
+</ol>
+<img src="../images/table_mapping.jpg" class="block"/>
+<ol start="47">
+<li>Accept the defaults on the Schema mapping page and click <strong>Next</strong>.</li>
+</ol>
+<img src="../images/schema_mapping_page.jpg" class="block"/>
+<ol start="48">
+<li>On the Performance settings page, you will specify a storage account that will be used to stage your data before Data Factory copies the data using Polybase. Specify a <strong>New connection</strong>, change the connection name to <strong>CohoStagingStorage</strong>, and choose the storage account you used during your migration for the storage account name.</li>
+</ol>
+<img src="../images/performance_settings.jpg" class="block"/>
+<ol start="49">
+<li>The summary page will give you a diagram and the configuration of what you are about to build. Click <strong>Next</strong> to initiate the deployment.</li>
+</ol>
+<img src="../images/summary.jpg" class="block"/>
+<ol start="50">
+<li>After the deployment completes, wait about 5 minutes then click on the <strong>Click here to monitor copy pipeline</strong> link.</li>
+</ol>
+<img src="../images/deployment_complete.jpg" class="block"/>
+<ol start="51">
+<li>Click on each of the pipelines in the lower pane of dashboard. Scroll down on the right pane to see status of the pipeline and the metrics from execution.</li>
+</ol>
+<img src="../images/pipelines.jpg" class="block"/>
+<ol start="52">
+<li>Open Internet Explorer and navigate to <a href="https://powerbi.microsoft.com" class="external"><strong>powerbi.com</strong></a> and click <strong>Sign in</strong> in the upper right corner of the screen.</li>
+</ol>
+<img src="../images/pbi_signin.jpg" class="block"/>
+<ol start="53">
+<li>
+<p>Sign in with the organizational account that you are using to access Power Bi Pro.</p>
+</li>
+<li>
+<p>Expand My Workspace, click the ellipses next to your dataset and choose remove.</p>
+</li>
+</ol>
+<img src="../images/pbi_remove.jpg" class="block"/>
+<ol start="55">
+<li>Click the ellipses next to your Azure SQL Data Warehouse dashboard and remove it.</li>
+</ol>
+<img src="../images/pbi_remove_adw.jpg" class="block"/>
+<ol start="56">
+<li>Click on the Get Data link in the lower left corner of the screen.</li>
+</ol>
+<img src="../images/pbi_get_data_link.jpg" class="block"/>
+<ol start="57">
+<li>
+<p>Setup a new connection to your Azure SQL Data Warehouse.</p>
+</li>
+<li>
+<p>If your new connection and dataset do not show up after the import, you may need to refresh your browser.</p>
+</li>
+<li>
+<p>Expand My Workspace and click on your dataset.</p>
+</li>
+</ol>
+<img src="../images/pbi_my_workspace2.jpg" class="block"/>
+<ol start="60">
+<li>Scroll down through your list of fields and you should now see the <strong>SalesOrderHeader</strong> and <strong>SalesTerritory</strong> tables that we imported using Azure Data Factory.</li>
+</ol>
+<img src="../images/pbi_fields_list.jpg" class="block"/>
+<ol start="61">
+<li>On the visualizations blade click the <strong>pie-chart</strong> icon.</li>
+</ol>
+<img src="../images/pbi_visualizations_blade.jpg" class="block"/>
+<ol start="62">
+<li>On the Fields blade, expand the SalesOrderHeader table and put a check next to <strong>∑ TotalDue</strong>, expand SalesTerritory and put a check next to <strong>Name</strong>.</li>
+</ol>
+<img src="../images/pbi_fields_blade.jpg" class="block"/>
+<ol start="63">
+<li>Drag the <strong>OrderDate</strong> field from the SalesOrderHeader table to the Report level filters.</li>
+</ol>
+<img src="../images/pbi_orderdate_field.jpg" class="block"/>
+<ol start="64">
+<li>Change the Filter Type to <strong>Advanced filtering</strong>, set the following values and then click <strong>Apply filter</strong>:
+<ul>
+<li>Show items when the value: <strong>is on or after</strong>
+</li>
+<li>Date: <strong>2014-06-30</strong>
+</li>
+<li>Time: <strong>12:00AM</strong>
+</li>
+<li>And: <strong>is before</strong>
+</li>
+<li>Date: <strong>2014-07-01</strong>
+</li>
+<li>Time: <strong>12:00AM</strong>
+</li>
+</ul>
+</li>
+</ol>
+<img src="../images/pbi_advanced_filtering.jpg" class="block"/>
+<ol start="65">
+<li>Click <strong>save</strong> and save your report with the name <strong>Sales by Region 6-30-2014</strong>
+</li>
+</ol>
+<h2 id="page_Summary">Summary</h2>
+<p>In this exercise, you have configured Power BI to connect directly to an Azure SQL Data Warehouse. You then deployed an Data Management Gateway to enable access to on-premises data sources from Azure Data Factory. You created a Copy Data pipeline in Azure Data Factory to update data in Azure SQL Data Warehouse. Finally, you created a new Power BI report to leverage the new data in your Azure SQL Data Warehouse.</p>
+    </div>
+
+            <nav class="hidden-print">
+            <ul class="pager">
+                                    <li class=pager-prev><a href="../Courseware/Migrate_to_ADW.html">Previous</a></li>
+                                            </ul>
+        </nav>
+    </article>
+        </div>
+        <div class="col-md-2 hidden-print">
+            <div class="article-links" data-spy="affix" data-offset-top="100">
+                <strong>In this article</strong><ol><li><a href="#page_Summary">Summary</a></li></ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div id="footer" class="container-fluid hidden-print">
+        <div class="row">
+            <div class="col-md-2 col-md-offset-1">
+            
+            </div>
+            <div class="col-md-8" style="text-align:right;">
+            This work is licensed under a Creative Commons Attribution 4.0 International License.
+            </div>
+        </div>
+    </div>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- JS -->
+    
+    <script src="../themes/azure/js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <script src="../themes/azure/js/theme.js"></script>
+
+</body>
+</html>

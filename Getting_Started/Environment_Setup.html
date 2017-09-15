@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Environment Setup - Migrate EDW to Azure SQL Data Warehouse</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="description" content="Azure Workshops" />
+    <meta name="author" content="Jim Rosengarth">
+    <link rel="icon" href="" type="image/x-icon">
+    
+    <!-- Font -->
+    
+    <!-- CSS -->
+    <link href='../themes/azure/css/vs.css' rel='stylesheet' type='text/css'><link href='../themes/azure/css/theme.css' rel='stylesheet' type='text/css'><link href='../themes/azure/css/theme-white.min.css' rel='stylesheet' type='text/css'>
+</head>
+<body class="">
+
+        <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 col-md-offset-1">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">Azure Workshops</a>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <!--
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+<div id="content-wrapper" class="container-fluid">
+    <div class="row hidden-print">
+        <div class="col-md-10 col-md-offset-1 breadcrumbs">
+            <a href="../index.html">Migrate EDW to Azure SQL Data Warehouse</a> / <a href="../Getting_Started/Requirements.html">Getting Started</a> / <a href="../Getting_Started/Environment_Setup.html">Environment Setup</a>        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-1 hidden-print">
+            <div data-spy="affix" data-offset-top="100">
+                <!-- Navigation -->
+                <ul class='Nav'><li class='Nav__item '><a href="../Overview.html">Overview</a></li><li class='Nav__item Nav__item--open has-children'><a href="#" class="aj-nav folder"><i class="Nav__arrow">&nbsp;</i>Getting Started</a><ul class='Nav'><li class='Nav__item '><a href="../Getting_Started/Requirements.html">Requirements</a></li><li class='Nav__item '><a href="../Getting_Started/Azure_Registration.html">Azure Registration</a></li><li class='Nav__item Nav__item--active'><a href="../Getting_Started/Environment_Setup.html">Environment Setup</a></li></ul></li><li class='Nav__item  has-children'><a href="#" class="aj-nav folder"><i class="Nav__arrow">&nbsp;</i>Courseware</a><ul class='Nav'><li class='Nav__item '><a href="../Courseware/Configure_Azure_Services.html">Configure Azure Services</a></li><li class='Nav__item '><a href="../Courseware/Data_and_Schema_Preparation.html">Data and Schema Preparation</a></li><li class='Nav__item '><a href="../Courseware/Migrate_to_ADW.html">Migrate to ADW</a></li><li class='Nav__item '><a href="../Courseware/Integrare_with_ADF.html">Integrare with ADF</a></li></ul></li></ul>
+                <div class="Links">
+                    
+                    <div class="pdf-link">
+                        <hr />
+                        <a href="../pdf/Migrate EDW to Azure SQL Data Warehouse.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span>Download PDF</span></a>
+                    </div>
+
+                                            <hr/>
+                        <div class="Twitter">
+                                                            <iframe allowtransparency="true" frameborder="0" scrolling="no" style="width:162px; height:20px;" src="https://platform.twitter.com/widgets/follow_button.html?screen_name=azureworkshops&amp;show_count=false"></iframe>
+                                <br />
+                                <br />
+                                                    </div>
+                                    </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <article class="Page">
+    <div class="pageHeader">
+        <h1>Environment Setup</h1>
+                    <div class="date"> Friday, September 15, 2017 5:25 PM</div>
+            </div>
+    <div class="copy">
+        <h2 id="page_Exercise-0-Environment-setup"><strong>Exercise 0:</strong> Environment setup</h2>
+<p><strong>Overview:</strong> In this exercise you will create a lab machine if necessary and deploy the source environment for this workshop.</p>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li>Microsoft Azure subscription: <a href="Azure_Registration.html">Azure Registration</a>
+</li>
+<li>Client computer with Windows 7 or later with Visual Studio 2017</li>
+</ul>
+<h3 id="page_Task-1-Setup-a-Development-Environment"><strong>Task 1:</strong> Setup a Development Environment</h3>
+<div class="bs-callout bs-callout-primary"><h4>Create VM</h4>If you do not have a machine setup with Visual Studio 2017 Community and Azure SDK 2.9+ you will need to complete this task.</div>
+
+<ol>
+<li>Create a virtual machine in Azure using the latest release of Visual Studio Community 2017.
+<ul>
+<li>It is highly recommended to use a DS2_V2 or D2_V2 instance size for this VM</li>
+</ul>
+</li>
+</ol>
+<img src="../images/create_vs_vm.jpg" class="block"/>
+<h3 id="page_Task-2-Disable-IE-Enhanced-Security"><strong>Task 2:</strong> Disable IE Enhanced Security</h3>
+<div class="bs-callout bs-callout-primary"><h4>Note</h4>Sometimes this image has IE ESC disabled, sometimes it does not.</div>
+
+<ol>
+<li>On the new VM you just created click the Server Manager icon.</li>
+</ol>
+<img src="../images/server_manager_icon.jpg" class="block"/>
+<ol start="2">
+<li>Click Local Server</li>
+</ol>
+<img src="../images/click_local_server.jpg" class="block"/>
+<ol start="3">
+<li>On the right side of the pane, click <strong>On</strong> by IE Enhanced Security Configuration.</li>
+</ol>
+<img src="../images/ie_enhanced_security_config.jpg" class="block"/>
+<ol start="4">
+<li>Change to <strong>Off</strong> for Administrators and click <strong>OK</strong>.</li>
+</ol>
+<img src="../images/turn_off_ie_esc.jpg" class="block"/>
+<h3 id="page_Task-3-Validate-Connectivity-to-Azure"><strong>Task 3:</strong> Validate Connectivity to Azure</h3>
+<ol>
+<li>
+<p>From within the virtual machine, Launch Visual Studio 2017 and validate that you can login with your Microsoft Account when prompted.</p>
+</li>
+<li>
+<p>Validate connectivity to your Azure subscription. Launch Visual Studio, open Server Explorer from the View menu, and ensure that you can connect to your Azure subscription.</p>
+</li>
+</ol>
+<img src="../images/vs_server_explorer_validate.jpg" class="block"/>
+<h3 id="page_Task-4-Deploy-the-ARM-template"><strong>Task 4:</strong> Deploy the ARM template</h3>
+<ol>
+<li>
+<p>From within your lab machine, create a new folder named <strong>C:\workshop</strong></p>
+</li>
+<li>
+<p>Download the ARM template from <a href="https://cloudworkshop.blob.core.windows.net/migrate-edw/Migating%20EDW%20to%20the%20Cloud%20workshop%20-%20Student-Files-6-2017.zip" class="external">https://cloudworkshop.blob.core.windows.net/migrate-edw/Migating%20EDW%20to%20the%20Cloud%20workshop%20-%20Student-Files-6-2017.zip</a> and extract to C:\workshop.</p>
+</li>
+<li>
+<p>Right-click the zip file, select properties, check the <strong>Unblock</strong> checkbox and click <strong>OK</strong>.</p>
+</li>
+</ol>
+<img src="../images/unblock_zip_file.jpg" class="block"/>
+<ol start="4">
+<li>
+<p>Open the C:\Hackathon\Migating EDW to the Cloud workshop - Student-Files\Templates\EnvironmentSetup\EnvironmentSetup.sln in Visual Studio</p>
+</li>
+<li>
+<p>Open <strong>PowerShell Interactive Window</strong> within Visual Studio.</p>
+</li>
+</ol>
+<img src="../images/vs_powershell_interactive_window.jpg" class="block"/>
+<ol start="6">
+<li>Run below commands to set PowerShell execution policy to bypass</li>
+</ol>
+<pre><code class="language-PowerShell">set-executionpolicy Bypass -Scope Process
+</code></pre>
+<img src="../images/powershell_window_execute.jpg" class="block"/>
+<ol start="7">
+<li>
+<p>In the Solution Explorer pane, under the EnvironmentSetup solution, right-click the EnvironmentSetup project, navigate to <strong>Deploy -&gt; New…</strong></p>
+</li>
+<li>
+<p>In the Deploy to Resource Group window, update the following:</p>
+<ol>
+<li>
+<p>Subscription: <strong>Choose the subscription you are using for your workshop</strong></p>
+</li>
+<li>
+<p>Resource group: <strong>Create a new resource group called DWEnvironment and select a location that is near you.</strong> Be aware that there is a limit to the number of cores per region available to you. Consider using another region if you already have resources deployed in your nearest region.</p>
+</li>
+<li>
+<p>Deployment template: <strong>azuredeploy.json</strong></p>
+</li>
+<li>
+<p>Template parameters file: <strong>azuredeploy.parameters.json</strong></p>
+</li>
+<li>
+<p>Click the <strong>Edit Parameters</strong> button.</p>
+<ul>
+<li>AdminUserName: <strong>demouser</strong>
+</li>
+<li>AdminPassword: <strong>demo@pass123</strong>
+</li>
+<li>dcipDnsName: <strong>create a unique name</strong>
+</li>
+<li>SQLsalesIPDnasName: <strong>create a unique name</strong>
+</li>
+<li>SQLwarehouseIPDnsName: <strong>create a unique name</strong>
+</li>
+</ul>
+</li>
+<li>
+<p>Artifact storage account: <strong>&lt;Automatically create a storage account&gt;</strong></p>
+</li>
+</ol>
+<img src="../images/deploy_to_resource_group.jpg" class="block"/>
+<img src="../images/edit_template_parameters.jpg" class="inline"/>
+</li>
+<li>
+<p>Click on <strong>OK</strong>.</p>
+</li>
+</ol>
+<h3 id="page_Task-5-Configure-DNS-and-join-the-domain"><strong>Task 5:</strong> Configure DNS and join the domain</h3>
+<ol>
+<li>
+<p>Browse to the Azure Portal and authenticate at <a href="https://portal.azure.com/" class="external">https://portal.azure.com/</a></p>
+</li>
+<li>
+<p>Navigate to the <strong>DWEnvironment</strong> resource group and select the <strong>cohovnet</strong> virtual network.</p>
+</li>
+</ol>
+<img src="../images/dw_env_resource_group.jpg" class="block"/>
+<ol start="3">
+<li>On the settings pane select <strong>DNS servers</strong>, then select <strong>Custom DNS</strong> on the DNS servers blade. Type <strong>10.0.0.10</strong> for the Primary DNS server then click the <strong>Save</strong> button.</li>
+</ol>
+<img src="../images/dns_server_settings.jpg" class="block"/>
+<ol start="4">
+<li>
+<p>Wait for the configuration change to complete before continuing.</p>
+</li>
+<li>
+<p>Navigate back to your <strong>DWEnvironment</strong> resource group and select the <strong>SQLCohoDW</strong> virtual machine.</p>
+</li>
+</ol>
+<img src="../images/dw_env_resource_group2.jpg" class="block"/>
+<ol start="6">
+<li>On the <strong>SQLCohoDW</strong> virtual machine blade, click the <strong>restart</strong> button, then click <strong>yes</strong> to restart the virtual machine.</li>
+</ol>
+<img src="../images/sqlcohodw_vm.jpg" class="block"/>
+<ol start="7">
+<li>Repeat steps 4 and 5 to restart the <strong>SQLCohoSales</strong> virtual machine.</li>
+</ol>
+<img src="../images/sqlcohosales_vm.jpg" class="block"/>
+<ol start="8">
+<li>Navigate back to the <strong>SQLCohoDW</strong> virtual machine and once <strong>SQLCohoDW</strong> has finished rebooting, connect to it using your <strong>demouser</strong> admin account.</li>
+</ol>
+<img src="../images/sqlcohodw_vm2.jpg" class="block"/>
+<ol start="9">
+<li>Once logged into <strong>SQLCohoDW</strong>, navigate to Server Manager, then click on <strong>Local Server</strong>, then click <strong>WORKGROUP</strong>.</li>
+</ol>
+<img src="../images/localserver_workgroup.jpg" class="block"/>
+<ol start="10">
+<li>On the Computer Name tab, click the <strong>Change</strong> button.</li>
+</ol>
+<img src="../images/change_system_properties.jpg" class="block"/>
+<ol start="11">
+<li>Make this virtual machine a member of the <strong>coho.com</strong> domain then click OK.</li>
+</ol>
+<img src="../images/domain_change.jpg" class="block"/>
+<ol start="12">
+<li>
+<p>Use <strong>demouser</strong> and <strong>demo@pass123</strong> for the domain administrator account, then click <strong>OK</strong>, <strong>Close</strong>, <strong>Restart Now</strong> to reboot the computer.</p>
+</li>
+<li>
+<p>Repeat steps 8 through 12 on the <strong>SQLCohoSales</strong> virtual machine to join <strong>SQLCohoSales</strong> to your domain.</p>
+</li>
+</ol>
+    </div>
+
+            <nav class="hidden-print">
+            <ul class="pager">
+                                    <li class=pager-prev><a href="../Getting_Started/Azure_Registration.html">Previous</a></li>
+                                                    <li class=pager-next><a href="../Courseware/Configure_Azure_Services.html">Next</a></li>            </ul>
+        </nav>
+    </article>
+        </div>
+        <div class="col-md-2 hidden-print">
+            <div class="article-links" data-spy="affix" data-offset-top="100">
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div id="footer" class="container-fluid hidden-print">
+        <div class="row">
+            <div class="col-md-2 col-md-offset-1">
+            
+            </div>
+            <div class="col-md-8" style="text-align:right;">
+            This work is licensed under a Creative Commons Attribution 4.0 International License.
+            </div>
+        </div>
+    </div>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- JS -->
+    
+    <script src="../themes/azure/js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <script src="../themes/azure/js/theme.js"></script>
+
+</body>
+</html>

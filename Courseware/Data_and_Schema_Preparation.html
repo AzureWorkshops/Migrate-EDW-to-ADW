@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Data and Schema Preparation - Migrate EDW to Azure SQL Data Warehouse</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="description" content="Azure Workshops" />
+    <meta name="author" content="Jim Rosengarth">
+    <link rel="icon" href="" type="image/x-icon">
+    
+    <!-- Font -->
+    
+    <!-- CSS -->
+    <link href='../themes/azure/css/vs.css' rel='stylesheet' type='text/css'><link href='../themes/azure/css/theme.css' rel='stylesheet' type='text/css'><link href='../themes/azure/css/theme-white.min.css' rel='stylesheet' type='text/css'>
+</head>
+<body class="">
+
+        <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 col-md-offset-1">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">Azure Workshops</a>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <!--
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+<div id="content-wrapper" class="container-fluid">
+    <div class="row hidden-print">
+        <div class="col-md-10 col-md-offset-1 breadcrumbs">
+            <a href="../index.html">Migrate EDW to Azure SQL Data Warehouse</a> / <a href="../Courseware/Configure_Azure_Services.html">Courseware</a> / <a href="../Courseware/Data_and_Schema_Preparation.html">Data and Schema Preparation</a>        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-1 hidden-print">
+            <div data-spy="affix" data-offset-top="100">
+                <!-- Navigation -->
+                <ul class='Nav'><li class='Nav__item '><a href="../Overview.html">Overview</a></li><li class='Nav__item  has-children'><a href="#" class="aj-nav folder"><i class="Nav__arrow">&nbsp;</i>Getting Started</a><ul class='Nav'><li class='Nav__item '><a href="../Getting_Started/Requirements.html">Requirements</a></li><li class='Nav__item '><a href="../Getting_Started/Azure_Registration.html">Azure Registration</a></li><li class='Nav__item '><a href="../Getting_Started/Environment_Setup.html">Environment Setup</a></li></ul></li><li class='Nav__item Nav__item--open has-children'><a href="#" class="aj-nav folder"><i class="Nav__arrow">&nbsp;</i>Courseware</a><ul class='Nav'><li class='Nav__item '><a href="../Courseware/Configure_Azure_Services.html">Configure Azure Services</a></li><li class='Nav__item Nav__item--active'><a href="../Courseware/Data_and_Schema_Preparation.html">Data and Schema Preparation</a></li><li class='Nav__item '><a href="../Courseware/Migrate_to_ADW.html">Migrate to ADW</a></li><li class='Nav__item '><a href="../Courseware/Integrare_with_ADF.html">Integrare with ADF</a></li></ul></li></ul>
+                <div class="Links">
+                    
+                    <div class="pdf-link">
+                        <hr />
+                        <a href="../pdf/Migrate EDW to Azure SQL Data Warehouse.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span>Download PDF</span></a>
+                    </div>
+
+                                            <hr/>
+                        <div class="Twitter">
+                                                            <iframe allowtransparency="true" frameborder="0" scrolling="no" style="width:162px; height:20px;" src="https://platform.twitter.com/widgets/follow_button.html?screen_name=azureworkshops&amp;show_count=false"></iframe>
+                                <br />
+                                <br />
+                                                    </div>
+                                    </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <article class="Page">
+    <div class="pageHeader">
+        <h1>Data and Schema Preparation</h1>
+                    <div class="date"> Friday, September 15, 2017 5:25 PM</div>
+            </div>
+    <div class="copy">
+        <h2 id="page_Exercise-2-Data-and-schema-preparation"><strong>Exercise 2:</strong> Data and schema preparation</h2>
+<p><strong>Overview:</strong> Coho is relying on you to migrate the data warehouse to Azure SQL Data Warehouse. One of the most important steps is preparing the data and schema. During this phase you will need to verify compatibility of the schema and data and make any necessary changes required for a successful migration.</p>
+<h3 id="page_Task-1-Check-compatibility-with-the-Data-Warehouse-Migration-Utility-Preview"><strong>Task 1:</strong> Check compatibility with the Data Warehouse Migration Utility (Preview)</h3>
+<ol>
+<li>
+<p>In the Azure portal, navigate to your <strong>DWEnvironment</strong> resource group, then connect to the <strong>SQLCohoDW</strong> virtual machine.</p>
+</li>
+<li>
+<p>Download the <a href="https://docs.microsoft.com/en-us/azure/sql-data-warehouse/sql-data-warehouse-migrate-migration-utility" class="external">Data Warehouse Migration Utility</a> (Preview) and extract the contents.</p>
+</li>
+</ol>
+<img src="../images/dw_migration_util_preview.jpg" class="block"/>
+<div class="bs-callout bs-callout-primary"><h4>Note</h4>If you get an internet explorer message ‘Your current security settings do not allow this file to be downloaded’, Go to Internet explorer Menu -> Internet Options -> Security Tab -> Click on Internet -> Select Custom Level -> Select ‘Enable’ in Downloads\File Download </div>
+
+<ol start="3">
+<li>
+<p>Run the Windows Installer file and follow the steps to install the Data Warehouse Migration Utility.</p>
+</li>
+<li>
+<p>Open the Data Warehouse Migration Utility by double-clicking the icon on your desktop.</p>
+</li>
+</ol>
+<img src="../images/open_dw_migration_util.jpg" class="block"/>
+<ol start="5">
+<li>The Data Warehouse Migration Utility will open on the source and destination selection window. Review the source and destination. Notice that the Data Warehouse Migration Utility supports migrations from SQL Server and Azure SQL Database. Make sure that Source Type is set to <strong>SQL Server</strong> then click <strong>Next</strong>.</li>
+</ol>
+<img src="../images/dw_migration_utility.jpg" class="block"/>
+<ol start="6">
+<li>On the Migration Source window, change the Server Name to <strong>SQLCohoDW</strong>, set Authentication to Windows, and then click <strong>Connect</strong>.</li>
+</ol>
+<img src="../images/dwmu_migration_source.jpg" class="block"/>
+<ol start="7">
+<li>Select the <strong>CohoDW</strong> database and then click the Check Compatibility button.</li>
+</ol>
+<img src="../images/dwmu_db_list.jpg" class="block"/>
+<ol start="8">
+<li>Choose an output location for your compatibility report and click the <strong>Save</strong> button. In the File Saved Successfully popup choose <strong>No</strong>.</li>
+</ol>
+<div class="bs-callout bs-callout-primary"><h4>NOTE</h4>You will not be able to open the compatibility report on the server as it does not have Excel installed.</div>
+
+<ol start="9">
+<li>
+<p>Open the file location that your report was saved (by default it will be in your My Documents folder) and copy and paste the file to your local machine.</p>
+</li>
+<li>
+<p>Open the file on your local machine to review the output (your output may be different than what you see below).</p>
+</li>
+</ol>
+<img src="../images/review_file_output.jpg" class="block"/>
+<div class="bs-callout bs-callout-primary"><h4>NOTE</h4>The Data Warehouse Migration Utility is currently in preview and the feature-set is incomplete and may have additional issues such as false negatives. It can be used to easily automate the migration of smaller databases but be aware that it does not compress files, move data to Azure storage or use Polybase for import.</div>
+
+<h3 id="page_Task-2-Validate-schema-and-data"><strong>Task 2:</strong> Validate schema and data</h3>
+<ol>
+<li>
+<p>In the Azure portal, navigate to your <strong>DWEnvironment</strong> resource group, then connect to the <strong>SQLCohoDW</strong> virtual machine.</p>
+</li>
+<li>
+<p>Launch SQL Server Management Studio and open a <strong>New Query</strong> window.</p>
+</li>
+</ol>
+<img src="../images/new_query_button.jpg" class="block"/>
+<ol start="3">
+<li>Run the following query to check for data incompatibility and potential data length issues.</li>
+</ol>
+<pre><code class="language-SQL">USE CohoDW
+GO
+SELECT t.[name] as [Table], 
+       c.[name] as [Column], 
+       c.[system_type_id], 
+       c.[user_type_id], 
+       y.[is_user_defined], 
+       y.[name]
+FROM sys.tables  t JOIN sys.columns c ON t.[object_id] = c.[object_id]
+                   JOIN sys.types y ON c.[user_type_id] = y.[user_type_id]
+WHERE y.[name] IN ('geography', 'geometry', 'hierarchyid', 'image', 'ntext',
+'numeric', 'sql_variant', 'sysname', 'text', 'timestamp', 'uniqueidentifier', 'xml')
+  OR (y.[name] IN ('varchar', 'varbinary') AND ((c.[max_length] = -1) or 
+                                              (c.max_length &gt; 8000)))
+  OR (y.[name] IN ('nvarchar') AND ((c.[max_length] = -1) or 
+                               (c.max_length &gt; 4000))) OR y.[is_user_defined] = 1;
+</code></pre>
+<div class="bs-callout bs-callout-primary"><h4>NOTE</h4> A full list of incompatible table features and data types can be found in the migration documentation at [https://azure.microsoft.com/en-us/documentation/articles/sql-data-warehouse-overview-migrate/](https://azure.microsoft.com/en-us/documentation/articles/sql-data-warehouse-overview-migrate/)</div>
+
+<ol start="4">
+<li>The output of the query shows the table and column but not the reason for the incompatibility. To gain more insight into the reason you can script the table out by expanding the CohoDW database in Object Explorer, right-click the table, select Script Table as -&gt; CREATE To -&gt; New Query Editor Window.</li>
+</ol>
+<img src="../images/script_table_as.jpg" class="block"/>
+<ol start="5">
+<li>From the script of the table you can see that the ‘TSQL’ column of the ‘DataLog’ table has a data type nvarchar(4000) which is equivalent to 8000 bytes which means that the data may potential exceed the maximum data size.</li>
+</ol>
+<img src="../images/create_table_script.jpg" class="block"/>
+<ol start="6">
+<li>Before we fix this column we must validate that none of the data would be truncated. Check the maximum actual data size with the following query.</li>
+</ol>
+<pre><code class="language-SQL">SELECT MAX(DATALENGTH([TSQL]))
+FROM DatabaseLog
+</code></pre>
+<pre><code>* The result is 3034 which means that our longest value is 3034 bytes or 1517 characters, leaving us plenty of space to modify the column with no loss of data.
+</code></pre>
+<ol start="7">
+<li>Modify the column by executing the following query:</li>
+</ol>
+<pre><code class="language-SQL">ALTER TABLE dbo.DatabaseLog ALTER COLUMN [TSQL] nvarchar(2000)
+</code></pre>
+<h3 id="page_Task-3-Prepare-Azure-SQL-Data-Warehouse-and-migrate-schema"><strong>Task 3:</strong> Prepare Azure SQL Data Warehouse and migrate schema</h3>
+<ol>
+<li>
+<p>In the Azure portal, navigate to your <strong>DWEnvironment</strong> group, then connect to the <strong>SQLCohoDW</strong> virtual machine.</p>
+</li>
+<li>
+<p>Open Internet Explorer and connect to the Azure Portal.</p>
+</li>
+<li>
+<p>Navigate to your CohoDWRG resource group, then click on the cohodw logical SQL Server that hosts your Azure SQL Data Warehouse.</p>
+</li>
+</ol>
+<img src="../images/cohodwrg.jpg" class="block"/>
+<ol start="4">
+<li>
+<p>In the settings blade, click on <strong>Firewall</strong>.</p>
+</li>
+<li>
+<p>In the cohodw - Firewall blade, click the <strong>+Add client IP</strong> button, then click the <strong>Save</strong> button.</p>
+</li>
+</ol>
+<img src="../images/firewall_settings.jpg" class="block"/>
+<ol start="6">
+<li>Back in the <strong>CohoDWRG</strong> resource group, select the <strong>CohoDW</strong> data warehouse and copy the server name.</li>
+</ol>
+<img src="../images/cohodw_resource_group.jpg" class="block"/>
+<ol start="7">
+<li>Open SQL Server Management studio, click the connect button in Object Explorer and connect to your SQL Data Warehouse using the <strong>demouser</strong> account and password to verify connectivity.</li>
+</ol>
+<img src="../images/db_login_demouser.jpg" class="block"/>
+<ol start="8">
+<li>
+<p>On your Azure SQL Data Warehouse, expand databases, select the CohoDW database then click the <strong>New Query</strong> button.</p>
+</li>
+<li>
+<p>Connect to the local SQLCohoDW instance of SQL Server, right click your local copy of CohoDW, and select <strong>Tasks -&gt; Generate Scripts</strong> to launch the Generate and Publish Scripts wizard.</p>
+</li>
+</ol>
+<img src="../images/tasks_generate_scripts.jpg" class="block"/>
+<ol start="10">
+<li>
+<p>Click Next on the Introduction screen.</p>
+</li>
+<li>
+<p>On the Choose Objects screen, <strong>Select the Select specific database objects</strong> radio button and check <strong>Tables</strong>, then click Next.</p>
+</li>
+</ol>
+<img src="../images/generate_and_publish_scripts.jpg" class="block"/>
+<ol start="12">
+<li>On the Set Scripting Options screen. Select the <strong>Save to Clipboard</strong> radio button and click Next.</li>
+</ol>
+<img src="../images/set_scripting_options.jpg" class="block"/>
+<ol start="13">
+<li>
+<p>Accept the defaults for the remaining screens and click <strong>Finish</strong>.</p>
+</li>
+<li>
+<p>Paste the results into the Query windows connected to your Azure SQL Data Warehouse.</p>
+</li>
+<li>
+<p>This script still needs to be modified before it will run correctly in Azure SQL Data Warehouse because some T-SQL syntax is not supported in Azure SQL Data Warehouse. Make the following updates to the script:</p>
+<ul>
+<li>Execute a Find and Replace on your script to replace all occurrences of “ON [PRIMARY]” with “” to remove them from the script.</li>
+</ul>
+</li>
+</ol>
+<img src="../images/on_primary.jpg" class="block"/>
+<pre><code>* Execute a Find and Replace on your script to replace all occurrences of “USE [” with “--USE [” to comment out those lines.
+</code></pre>
+<img src="../images/far_use.jpg" class="block"/>
+<pre><code>* Execute a Find and Replace on your script to replace all occurrences of “SET ANSI_PADDING” with “--SET ANSI_PADDING” to comment out those lines.
+</code></pre>
+<img src="../images/set_ansi_padding.jpg" class="block"/>
+<ol start="16">
+<li>Run the script by clicking the Execute button. This will use the default options to create tables, Clustered Columnstore Indexing and ROUNDROBIN distribution.</li>
+</ol>
+<img src="../images/execute_button.jpg" class="block"/>
+<ol start="17">
+<li>Execute the following query to verify that your tables were created. There should be 33 rows returned.</li>
+</ol>
+<pre><code class="language-SQL">SELECT * FROM sys.tables
+</code></pre>
+<h2 id="page_Summary">Summary</h2>
+<p>In this exercise, you prepared and verified your schema with a combination of the Data Warehouse Migration Utility and T-SQL scripts to analyze the schema and data. You then scripted your database, made the necessary changes and applied your script to Azure SQL Data Warehouse.</p>
+    </div>
+
+            <nav class="hidden-print">
+            <ul class="pager">
+                                    <li class=pager-prev><a href="../Courseware/Configure_Azure_Services.html">Previous</a></li>
+                                                    <li class=pager-next><a href="../Courseware/Migrate_to_ADW.html">Next</a></li>            </ul>
+        </nav>
+    </article>
+        </div>
+        <div class="col-md-2 hidden-print">
+            <div class="article-links" data-spy="affix" data-offset-top="100">
+                <strong>In this article</strong><ol><li><a href="#page_Summary">Summary</a></li></ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div id="footer" class="container-fluid hidden-print">
+        <div class="row">
+            <div class="col-md-2 col-md-offset-1">
+            
+            </div>
+            <div class="col-md-8" style="text-align:right;">
+            This work is licensed under a Creative Commons Attribution 4.0 International License.
+            </div>
+        </div>
+    </div>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- JS -->
+    
+    <script src="../themes/azure/js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <script src="../themes/azure/js/theme.js"></script>
+
+</body>
+</html>
